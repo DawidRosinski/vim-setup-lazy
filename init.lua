@@ -1,3 +1,6 @@
+
+vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 -- vim.opt.guicursor = ""
 
 vim.opt.nu = true
@@ -45,11 +48,36 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Color scheme 
-local plugins = { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+local plugins = {
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+-- telescope
+-- init.lua:
+    {
+    'nvim-telescope/telescope.nvim', tag = '0.1.6',
+-- or                              , branch = '0.1.x',
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}
+}
+
 local opts = {}
 require("lazy").setup(plugins, opts)
 
+local config = require("nvim-treesitter.configs")
+config.setup({
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "rust", "python"},
+    highlight = { enable = true },
+    indent = { enable = true } 
+})
 
 require("catppuccin").setup()
 vim.cmd.colorscheme("catppuccin")
+
+-- initialize telescope
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
