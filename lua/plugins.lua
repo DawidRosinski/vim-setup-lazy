@@ -1,5 +1,0 @@
-
-return {
--- telescope
--- init.lua:
-}
