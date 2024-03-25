@@ -15,16 +15,27 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+        lazy = false,
         config = function()
+            -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
             local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup({})
-            lspconfig.clangd.setup({})
-            lspconfig.pyright.setup({})
+            lspconfig.lua_ls.setup({
+                capabilities = capabilities
+            })
+            lspconfig.clangd.setup({
+                capabilities = capabilities
+            })
+            lspconfig.pyright.setup({
+                capabilities = capabilities
+            })
             lspconfig.rust_analyzer.setup({
+                capabilities = capabilities,
                 settings = {
                     ['rust-analyzer'] = {
                         diagnostics = {
-                            enable = false;
+                            enable = false,
                         }
                     }
                 }
@@ -68,7 +79,6 @@ return {
                     end, opts)
                 end,
             })
-
         end
     }
 }
