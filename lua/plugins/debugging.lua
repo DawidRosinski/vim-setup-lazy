@@ -41,6 +41,34 @@ return {
 			},
 		}
 
+        -- Windows setup  
+        --[[
+       local cpptools_path = vim.fn.stdpath("data").."\\mason\\packages\\cpptools\\extension\\debugAdapters\\bin\\OpenDebugAD7"
+
+        dap.adapters.cppdbg = {
+            id = 'cppdbg',
+            type = 'executable',
+            command = cpptools_path,
+            options = {
+                detached = false
+            }
+        }
+
+        dap.configurations.cpp = {
+            {
+                name = "Launch",
+                type = "cppdbg",
+                request = "launch",
+                program = function()
+                    print(cpptools_path)
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = "${workspaceFolder}",
+                stopAtBeginningOfMainSubprogram = false,
+            },
+        }
+        --]]
+
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
 		end
