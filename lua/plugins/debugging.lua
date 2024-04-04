@@ -12,7 +12,7 @@ return {
 
 		dapui.setup()
 		-- require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-        require("dap-python").setup(vim.fn.getcwd() .. "/venv/bin/python")
+		require("dap-python").setup(vim.fn.getcwd() .. "/venv/bin/python")
 
 		dap.adapters.codelldb = {
 			type = "server",
@@ -20,7 +20,7 @@ return {
 			executable = {
 				-- CHANGE THIS to your path!
 				-- command = "/absolute/path/to/codelldb/extension/adapter/codelldb",
-                command = "/Users/dawid/.local/share/nvim/mason/bin/codelldb",
+				command = "/Users/dawid/.local/share/nvim/mason/bin/codelldb",
 				args = { "--port", "${port}" },
 
 				-- On windows you may have to uncomment this:
@@ -41,8 +41,11 @@ return {
 			},
 		}
 
-        -- Windows setup  
-        --[[
+		dap.configurations.c = dap.configurations.cpp
+		dap.configurations.rust = dap.configurations.cpp
+
+		-- Windows setup
+		--[[
        local cpptools_path = vim.fn.stdpath("data").."\\mason\\packages\\cpptools\\extension\\debugAdapters\\bin\\OpenDebugAD7"
 
         dap.adapters.cppdbg = {
