@@ -1,11 +1,12 @@
 
+
 return {
-    "catppuccin/nvim",
+    "p00f/alabaster.nvim",
     lazy = false,
-    name = "catppuccin",
+    name = "alabaster",
     priority = 1000,
-    enabled = false,
+    enabled = true,
     config = function() -- defual implementation will run automatically required(MAIN).setup(opts)
-        vim.cmd.colorscheme("catppuccin")
+        vim.cmd.colorscheme("alabaster")
     end
 }
